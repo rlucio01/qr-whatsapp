@@ -5,172 +5,169 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Conectar WhatsApp — UAZAPI</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg: #06100a;
-      --surface: #0d1e12;
-      --card: #101f15;
-      --border: #1f3a2580;
-      --green: #25d366;
-      --green-dim: #1db355;
-      --green-glow: #25d36628;
-      --text: #dff0e5;
-      --muted: #5d8a6e;
-      --danger: #f05757;
-      --warning: #f5c842;
+      --bg:         #06100a;
+      --surface:    #0d1e12;
+      --card:       #101f15;
+      --border:     rgba(31,58,37,.5);
+      --green:      #25d366;
+      --green-dim:  #1db355;
+      --green-glow: rgba(37,211,102,.18);
+      --text:       #dff0e5;
+      --muted:      #5d8a6e;
+      --danger:     #f05757;
+      --warn:       #f5c842;
     }
 
     body {
       font-family: 'Syne', sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      background: var(--bg); color: var(--text);
       min-height: 100vh;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       padding: 2rem 1rem 3rem;
       position: relative; overflow-x: hidden;
     }
-
     body::before {
-      content: ''; position: fixed; inset: 0;
+      content:''; position:fixed; inset:0; pointer-events:none;
       background:
-        radial-gradient(ellipse 70% 50% at 50% -10%, #0d4a2255 0%, transparent 65%),
-        radial-gradient(ellipse 40% 30% at 90% 90%, #0d3a1a22 0%, transparent 60%);
-      pointer-events: none; z-index: 0;
+        radial-gradient(ellipse 70% 50% at 50% -10%, rgba(13,74,34,.35) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 30% at 90% 90%,  rgba(13,58,26,.2)  0%, transparent 60%);
     }
-
-    .grid {
-      position: fixed; inset: 0;
+    .grid-bg {
+      position:fixed; inset:0; pointer-events:none;
       background-image:
-        linear-gradient(rgba(37,211,102,.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(37,211,102,.06) 1px, transparent 1px);
+        linear-gradient(rgba(37,211,102,.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37,211,102,.055) 1px, transparent 1px);
       background-size: 52px 52px;
-      pointer-events: none; z-index: 0;
     }
 
-    .container { width: 100%; max-width: 480px; position: relative; z-index: 1; }
+    .container { width:100%; max-width:440px; position:relative; z-index:1; }
 
-    /* HEADER */
-    .header { text-align: center; margin-bottom: 2rem; animation: fadeDown .55s ease both; }
-    .brand { display: inline-flex; align-items: center; gap: .7rem; margin-bottom: 1rem; }
-    .brand-icon {
-      width: 46px; height: 46px;
-      background: var(--green-glow); border: 1.5px solid var(--green);
-      border-radius: 13px; display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 0 28px var(--green-glow);
+    /* header */
+    .header { text-align:center; margin-bottom:1.75rem; animation: fadeDown .5s ease both; }
+    .brand  { display:inline-flex; align-items:center; gap:.65rem; margin-bottom:.9rem; }
+    .brand-ico {
+      width:44px; height:44px;
+      background:var(--green-glow); border:1.5px solid var(--green);
+      border-radius:12px; display:flex; align-items:center; justify-content:center;
+      box-shadow:0 0 24px var(--green-glow);
     }
-    .brand-icon svg { width: 24px; height: 24px; fill: var(--green); }
-    .brand-name { font-size: 1.4rem; font-weight: 800; letter-spacing: -.03em; }
-    .subtitle { font-size: .875rem; color: var(--muted); line-height: 1.65; font-weight: 400; }
+    .brand-ico svg { width:22px; height:22px; fill:var(--green); }
+    .brand-name { font-size:1.35rem; font-weight:800; letter-spacing:-.03em; }
+    .subtitle { font-size:.85rem; color:var(--muted); line-height:1.65; }
 
-    /* CARD */
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 1.75rem; margin-bottom: 1rem; }
-    .card-label { font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--green); margin-bottom: 1.1rem; }
+    /* card */
+    .card {
+      background:var(--card); border:1px solid var(--border);
+      border-radius:18px; padding:1.6rem; margin-bottom:.9rem;
+    }
+    .card-lbl {
+      font-size:.67rem; font-weight:700; letter-spacing:.12em;
+      text-transform:uppercase; color:var(--green); margin-bottom:1rem;
+    }
 
-    /* FORM */
-    .field { margin-bottom: .9rem; }
-    .field label { display: block; font-size: .75rem; color: var(--muted); margin-bottom: .35rem; font-family: 'DM Mono', monospace; }
+    /* form */
+    .field { margin-bottom:.85rem; }
+    .field label { display:block; font-size:.74rem; color:var(--muted); margin-bottom:.3rem; font-family:'DM Mono',monospace; }
     .field input {
-      width: 100%; background: var(--surface); border: 1px solid var(--border);
-      border-radius: 9px; padding: .72rem .95rem; color: var(--text);
-      font-family: 'DM Mono', monospace; font-size: .83rem; outline: none;
+      width:100%; background:var(--surface); border:1px solid var(--border);
+      border-radius:9px; padding:.7rem .9rem; color:var(--text);
+      font-family:'DM Mono',monospace; font-size:.82rem; outline:none;
       transition: border-color .2s, box-shadow .2s;
     }
-    .field input:focus { border-color: var(--green); box-shadow: 0 0 0 3px var(--green-glow); }
-    .field input::placeholder { color: var(--muted); opacity: .45; }
+    .field input:focus { border-color:var(--green); box-shadow:0 0 0 3px rgba(37,211,102,.15); }
+    .field input::placeholder { color:var(--muted); opacity:.4; }
 
-    /* BUTTONS */
+    /* buttons */
     .btn {
-      width: 100%; padding: .85rem 1.4rem; border-radius: 11px;
-      font-family: 'Syne', sans-serif; font-weight: 700; font-size: .9rem;
-      cursor: pointer; border: none; transition: all .2s;
-      display: flex; align-items: center; justify-content: center; gap: .55rem; letter-spacing: .02em;
+      width:100%; padding:.82rem 1.3rem; border-radius:10px;
+      font-family:'Syne',sans-serif; font-weight:700; font-size:.88rem;
+      cursor:pointer; border:none; transition:all .18s;
+      display:flex; align-items:center; justify-content:center; gap:.5rem;
     }
-    .btn-primary { background: var(--green); color: #04100a; box-shadow: 0 4px 22px var(--green-glow); }
-    .btn-primary:hover:not(:disabled) { background: var(--green-dim); transform: translateY(-1px); box-shadow: 0 6px 30px var(--green-glow); }
-    .btn-primary:active:not(:disabled) { transform: translateY(0); }
-    .btn-primary:disabled { opacity: .45; cursor: not-allowed; }
-    .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); margin-top: .6rem; font-size: .82rem; }
-    .btn-ghost:hover { color: var(--text); border-color: var(--muted); }
+    .btn-primary { background:var(--green); color:#04100a; box-shadow:0 4px 20px var(--green-glow); }
+    .btn-primary:hover:not(:disabled) { background:var(--green-dim); transform:translateY(-1px); }
+    .btn-primary:disabled { opacity:.4; cursor:not-allowed; }
+    .btn-ghost {
+      background:transparent; color:var(--muted);
+      border:1px solid var(--border); margin-top:.55rem; font-size:.8rem;
+    }
+    .btn-ghost:hover { color:var(--text); border-color:var(--muted); }
 
-    /* STATUS */
+    /* status */
     .status {
-      display: flex; align-items: center; gap: .6rem;
-      padding: .7rem 1.1rem; border-radius: 9px; border: 1px solid transparent;
-      font-family: 'DM Mono', monospace; font-size: .78rem; margin-bottom: 1rem;
+      display:flex; align-items:center; gap:.55rem;
+      padding:.65rem 1rem; border-radius:9px; border:1px solid transparent;
+      font-family:'DM Mono',monospace; font-size:.76rem; margin-bottom:.9rem;
     }
-    .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-    .status.loading { background: #ffffff08; border-color: var(--border); color: var(--muted); }
-    .status.loading .dot { background: var(--muted); animation: blink 1s infinite; }
-    .status.ok { background: #25d36614; border-color: #25d36640; color: var(--green); }
-    .status.ok .dot { background: var(--green); }
-    .status.err { background: #f0575714; border-color: #f0575740; color: var(--danger); }
-    .status.err .dot { background: var(--danger); }
-    .status.live { background: #f5c84214; border-color: #f5c84240; color: var(--warning); }
-    .status.live .dot { background: var(--warning); animation: blink 1.2s infinite; }
+    .dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+    .status.loading { background:rgba(255,255,255,.04); border-color:var(--border); color:var(--muted); }
+    .status.loading .dot { background:var(--muted); animation:blink 1s infinite; }
+    .status.ok   { background:rgba(37,211,102,.08);  border-color:rgba(37,211,102,.3); color:var(--green); }
+    .status.ok   .dot { background:var(--green); }
+    .status.err  { background:rgba(240,87,87,.08);   border-color:rgba(240,87,87,.3);  color:var(--danger); }
+    .status.err  .dot { background:var(--danger); }
+    .status.live { background:rgba(245,200,66,.08);  border-color:rgba(245,200,66,.3); color:var(--warn); }
+    .status.live .dot { background:var(--warn); animation:blink 1.3s infinite; }
 
     /* QR */
-    .qr-wrap { display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
-    .qr-box { background: #fff; border-radius: 14px; padding: 1.1rem; box-shadow: 0 0 50px var(--green-glow); }
-    #qrcode canvas, #qrcode img { display: block; border-radius: 6px; }
-    .qr-meta { text-align: center; }
-    .qr-meta p { font-size: .83rem; color: var(--muted); line-height: 1.7; }
-    .qr-meta strong { color: var(--text); }
-    .timer-badge {
-      display: inline-flex; align-items: center; gap: .4rem;
-      padding: .3rem .75rem; background: var(--surface);
-      border: 1px solid var(--border); border-radius: 99px;
-      font-family: 'DM Mono', monospace; font-size: .75rem; color: var(--warning); margin-top: .5rem;
+    .qr-wrap { display:flex; flex-direction:column; align-items:center; gap:1.2rem; }
+    .qr-box  {
+      background:#fff; border-radius:14px; padding:1.05rem;
+      box-shadow:0 0 50px var(--green-glow);
+    }
+    .qr-box img { display:block; width:240px; height:240px; border-radius:6px; }
+    .qr-meta { text-align:center; }
+    .qr-meta p { font-size:.82rem; color:var(--muted); line-height:1.7; }
+    .qr-meta strong { color:var(--text); }
+    .timer {
+      display:inline-flex; align-items:center; gap:.35rem; margin-top:.45rem;
+      padding:.28rem .7rem; background:var(--surface); border:1px solid var(--border);
+      border-radius:99px; font-family:'DM Mono',monospace; font-size:.73rem; color:var(--warn);
     }
 
-    /* INFO BOX */
-    .info-box {
-      background: #4dc8f510; border: 1px solid #4dc8f530; border-radius: 10px;
-      padding: .75rem 1rem; font-size: .75rem; color: #7dd8f7;
-      font-family: 'DM Mono', monospace; margin-top: .75rem; line-height: 1.7;
+    /* info box */
+    .box-info {
+      background:rgba(77,200,245,.07); border:1px solid rgba(77,200,245,.25);
+      border-radius:9px; padding:.7rem .9rem;
+      font-family:'DM Mono',monospace; font-size:.72rem; color:#7dd8f7;
+      margin-top:.75rem; line-height:1.75;
     }
-    .info-box b { color: #a0e4ff; }
-    .info-box code { background: #ffffff10; padding: .1rem .35rem; border-radius: 4px; font-size: .7rem; word-break: break-all; }
-
-    /* CORS HELP */
-    .cors-help {
-      background: #f5c84210; border: 1px solid #f5c84240; border-radius: 10px;
-      padding: .85rem 1rem; font-size: .76rem; color: var(--warning);
-      font-family: 'DM Mono', monospace; margin-bottom: 1rem; line-height: 1.75;
+    .box-info b { color:#a0e4ff; }
+    .box-info code {
+      background:rgba(255,255,255,.08); padding:.1rem .3rem;
+      border-radius:4px; font-size:.68rem; word-break:break-all;
     }
-    .cors-help b { color: #f8d96a; }
-    .cors-help code { background: #ffffff10; padding: .1rem .35rem; border-radius: 4px; font-size: .7rem; }
 
-    /* SUCCESS */
+    /* success */
     .check-wrap {
-      width: 240px; height: 240px;
-      display: flex; align-items: center; justify-content: center;
-      background: #f0fdf4; border-radius: 6px;
+      width:240px; height:240px;
+      display:flex; align-items:center; justify-content:center;
+      background:#f0fdf4; border-radius:8px;
     }
-    .check-wrap svg { width: 90px; height: 90px; }
+    .check-wrap svg { width:88px; height:88px; }
 
-    .footer { margin-top: 1.5rem; text-align: center; font-size: .72rem; color: var(--muted); opacity: .45; animation: fadeUp .6s ease .3s both; }
+    .footer { margin-top:1.25rem; text-align:center; font-size:.7rem; color:var(--muted); opacity:.4; }
 
-    .hidden { display: none !important; }
+    .hidden { display:none !important; }
 
-    @keyframes fadeDown { from { opacity:0; transform:translateY(-14px); } to { opacity:1; transform:translateY(0); } }
-    @keyframes fadeUp   { from { opacity:0; transform:translateY(14px);  } to { opacity:1; transform:translateY(0); } }
-    @keyframes blink    { 0%,100%{opacity:1;} 50%{opacity:.25;} }
-    @keyframes spin     { to{transform:rotate(360deg);} }
+    @keyframes fadeDown { from{opacity:0;transform:translateY(-12px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes blink    { 0%,100%{opacity:1} 50%{opacity:.2} }
+    @keyframes spin     { to{transform:rotate(360deg)} }
   </style>
 </head>
 <body>
-<div class="grid"></div>
+<div class="grid-bg"></div>
 <div class="container">
 
   <!-- HEADER -->
   <div class="header">
     <div class="brand">
-      <div class="brand-icon">
+      <div class="brand-ico">
         <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.6 12.6 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       </div>
       <span class="brand-name">Conectar WhatsApp</span>
@@ -181,314 +178,263 @@
   <!-- STATUS -->
   <div class="status hidden" id="statusBar">
     <div class="dot"></div>
-    <span id="statusText"></span>
-  </div>
-
-  <!-- CORS HELP -->
-  <div class="cors-help hidden" id="corsHelp">
-    ⚠️ <b>Bloqueio de CORS detectado.</b><br><br>
-    O navegador impediu a requisição porque esta página está em <code>github.io (HTTPS)</code> e a API precisa permitir esse origin.<br><br>
-    <b>Como resolver no painel UAZAPI:</b><br>
-    Nas configurações da instância, adicione o origin:<br>
-    <code>https://rlucio01.github.io</code><br><br>
-    Ou acesse esta página pelo mesmo domínio da sua API.
+    <span id="statusTxt"></span>
   </div>
 
   <!-- CONFIG CARD -->
-  <div class="card" id="configCard">
-    <div class="card-label">⚙ Configuração da instância</div>
+  <div class="card" id="cfgCard">
+    <div class="card-lbl">⚙ Configuração da instância</div>
     <div class="field">
       <label>URL Base da API</label>
-      <input id="apiUrl" type="text" placeholder="https://free.uazapi.com" autocomplete="off" />
+      <input id="fUrl" type="text" placeholder="https://free.uazapi.com" autocomplete="off" />
     </div>
     <div class="field">
       <label>Token da Instância</label>
-      <input id="apiToken" type="password" placeholder="e526fbf9-7a04-4693-..." autocomplete="off" />
+      <input id="fToken" type="password" placeholder="e526fbf9-7a04-4693-aeb7-0ebae75aefc2" autocomplete="off" />
     </div>
     <button class="btn btn-primary" id="btnGo" onclick="iniciar()">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
       Gerar QR Code
     </button>
-    <div class="info-box" id="linkHint">
+    <div class="box-info">
       💡 <b>Compartilhe o link já configurado:</b><br>
-      <code id="urlExample"></code>
+      <code id="linkShare"></code>
     </div>
   </div>
 
   <!-- QR CARD -->
   <div class="card hidden" id="qrCard">
-    <div class="card-label">📱 Escaneie com o WhatsApp</div>
+    <div class="card-lbl">📱 Escaneie com o WhatsApp</div>
     <div class="qr-wrap">
-      <div class="qr-box"><div id="qrcode"></div></div>
+      <div class="qr-box" id="qrBox">
+        <!-- imagem QR inserida aqui -->
+      </div>
       <div class="qr-meta">
-        <p>Abra o WhatsApp → <strong>Configurações</strong><br>→ <strong>Aparelhos conectados</strong> → <strong>Conectar aparelho</strong></p>
-        <div class="timer-badge hidden" id="timerBadge">⏱ Expira em <span id="countdown">60</span>s</div>
+        <p>Abra o WhatsApp → <strong>Configurações</strong><br>
+          → <strong>Aparelhos conectados → Conectar aparelho</strong></p>
+        <div class="timer hidden" id="timerBadge">
+          ⏱ Expira em <span id="countdown">60</span>s
+        </div>
       </div>
     </div>
     <button class="btn btn-ghost" onclick="refreshQR()">↻ Atualizar QR Code</button>
-    <button class="btn btn-ghost" onclick="voltarConfig()">← Alterar configurações</button>
+    <button class="btn btn-ghost" onclick="voltarCfg()">← Alterar configurações</button>
   </div>
 
   <div class="footer">Powered by UAZAPI · GitHub Pages</div>
 </div>
 
 <script>
-// ─── Estado ──────────────────────────────────────────────────────────────────
+// ─── state ────────────────────────────────────────────────────────────────────
 let apiUrl = '', apiToken = '';
-let qrObj = null, timerInt = null, pollInt = null, secsLeft = 60;
+let timerInt = null, pollInt = null, secs = 60;
 
-// ─── Inicialização ────────────────────────────────────────────────────────────
+// ─── init ─────────────────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
   const p = new URLSearchParams(location.search);
-  const urlParam   = p.get('url')   || p.get('api')   || '';
-  const tokenParam = p.get('token') || p.get('t')     || '';
-
   let saved = {};
-  try { saved = JSON.parse(localStorage.getItem('uaz_cfg') || '{}'); } catch {}
+  try { saved = JSON.parse(localStorage.getItem('uaz3') || '{}'); } catch {}
 
-  document.getElementById('apiUrl').value   = urlParam   || saved.url   || '';
-  document.getElementById('apiToken').value = tokenParam || saved.token || '';
+  $('fUrl').value   = p.get('url')   || saved.url   || '';
+  $('fToken').value = p.get('token') || saved.token || '';
 
-  // Montar link de exemplo
-  const base = location.href.split('?')[0];
-  document.getElementById('urlExample').textContent =
-    `${base}?url=https://free.uazapi.com&token=SEU_TOKEN`;
+  atualizarLink();
+  $('fUrl').addEventListener('input',   atualizarLink);
+  $('fToken').addEventListener('input', atualizarLink);
 
-  // Se vier na URL, inicia automaticamente
-  if (urlParam && tokenParam) setTimeout(iniciar, 400);
+  // auto-start se vier pelos parâmetros de URL
+  if (p.get('url') && p.get('token')) setTimeout(iniciar, 400);
 });
 
-// ─── Helpers de UI ───────────────────────────────────────────────────────────
-function setStatus(tipo, msg) {
-  const bar = document.getElementById('statusBar');
-  bar.className = `status ${tipo}`;
-  bar.classList.remove('hidden');
-  document.getElementById('statusText').textContent = msg;
+function $(id) { return document.getElementById(id); }
+
+function atualizarLink() {
+  const base  = location.href.split('?')[0];
+  const url   = $('fUrl').value.trim()   || 'https://free.uazapi.com';
+  const token = $('fToken').value.trim() || 'SEU_TOKEN';
+  $('linkShare').textContent = `${base}?url=${encodeURIComponent(url)}&token=${encodeURIComponent(token)}`;
 }
 
-// ─── Requisição com timeout ───────────────────────────────────────────────────
+// ─── status UI ────────────────────────────────────────────────────────────────
+function setStatus(tipo, msg) {
+  const bar = $('statusBar');
+  bar.className = 'status ' + tipo;
+  bar.classList.remove('hidden');
+  $('statusTxt').textContent = msg;
+}
+
+// ─── fetch com timeout ────────────────────────────────────────────────────────
 async function apiFetch(url, opts = {}) {
   const ctrl = new AbortController();
-  const tid  = setTimeout(() => ctrl.abort(), 12000);
+  const tid  = setTimeout(() => ctrl.abort(), 15000);
   try {
     const r = await fetch(url, { ...opts, signal: ctrl.signal });
     clearTimeout(tid);
     return r;
-  } catch (e) {
-    clearTimeout(tid);
-    throw e;
-  }
+  } catch(e) { clearTimeout(tid); throw e; }
 }
 
-// ─── Headers UAZAPI v2 ────────────────────────────────────────────────────────
-// A UAZAPI v2 (free.uazapi.com) autentica via header "token"
-function hdrs() {
-  return {
-    'Content-Type': 'application/json',
-    'token': apiToken,
-  };
+// ─── buscar QR — endpoints confirmados pelo debug ─────────────────────────────
+// Confirmado: POST /instance/connect e GET /instance/status retornam
+//   { instance: { qrcode: "data:image/png;base64,..." } }
+async function buscarQR() {
+  const base = apiUrl.replace(/\/+$/, '');
+  const hdrs = { 'Content-Type': 'application/json', 'token': apiToken };
+
+  // 1º: POST /instance/connect (mais rápido, sempre retorna QR fresco)
+  try {
+    const r = await apiFetch(`${base}/instance/connect`, {
+      method: 'POST',
+      headers: hdrs,
+      body: '{}',
+    });
+    const data = await r.json();
+    const qr = extrairQR(data);
+    if (qr) return qr;
+  } catch(e) { console.warn('POST /instance/connect falhou:', e.message); }
+
+  // 2º: GET /instance/status (fallback — também traz qrcode enquanto desconectado)
+  try {
+    const r = await apiFetch(`${base}/instance/status`, {
+      method: 'GET',
+      headers: hdrs,
+    });
+    const data = await r.json();
+    const qr = extrairQR(data);
+    if (qr) return qr;
+  } catch(e) { console.warn('GET /instance/status falhou:', e.message); }
+
+  throw new Error('Nenhum endpoint retornou QR Code.');
 }
 
-function base() { return apiUrl.replace(/\/+$/, ''); }
-
-// ─── Extrair QR de qualquer formato de resposta ───────────────────────────────
+// ─── extrair QR do JSON retornado ─────────────────────────────────────────────
+// Estrutura confirmada: data.instance.qrcode = "data:image/png;base64,..."
 function extrairQR(data) {
-  if (typeof data === 'string' && data.length > 20 && !data.startsWith('<'))
-    return { tipo: 'str', val: data };
+  // Caminho principal confirmado
+  if (data?.instance?.qrcode) return data.instance.qrcode;
 
-  const caminhos = [
-    data?.qrcode, data?.qr, data?.qrCode, data?.code,
+  // Caminhos alternativos por segurança
+  const candidates = [
+    data?.qrcode, data?.qr, data?.qrCode,
     data?.data?.qrcode, data?.data?.qr, data?.data?.qrCode,
-    data?.instance?.qr, data?.instance?.qrCode,
-    data?.result?.qr, data?.result?.qrCode,
-    data?.base64, data?.data?.base64,
+    data?.result?.qrcode, data?.result?.qr,
   ];
-
-  for (const c of caminhos) {
-    if (!c || typeof c !== 'string') continue;
-    if (c.startsWith('data:image')) return { tipo: 'img', val: c };
-    if (c.length > 20) return { tipo: 'str', val: c };
+  for (const c of candidates) {
+    if (c && typeof c === 'string' && c.length > 20) return c;
   }
   return null;
 }
 
-// ─── Tentar todos endpoints conhecidos da UAZAPI v2 ───────────────────────────
-async function buscarQR() {
-  const b = base();
+// ─── renderizar QR Code (base64 PNG) ─────────────────────────────────────────
+function renderQR(base64png) {
+  const box = $('qrBox');
+  box.innerHTML = `<img src="${base64png}" alt="QR Code WhatsApp" />`;
 
-  // Endpoints da UAZAPI v2 em ordem de probabilidade
-  const tentativas = [
-    { method: 'GET',  url: `${b}/instance/connect`     },
-    { method: 'GET',  url: `${b}/instance/qrcode`      },
-    { method: 'POST', url: `${b}/instance/connect`, body: '{}' },
-    { method: 'GET',  url: `${b}/qrcode`               },
-    { method: 'GET',  url: `${b}/connect`              },
-    { method: 'POST', url: `${b}/connect`,          body: '{}' },
-  ];
-
-  let ultimoErro = null;
-
-  for (const t of tentativas) {
-    try {
-      const r = await apiFetch(t.url, {
-        method: t.method,
-        headers: hdrs(),
-        ...(t.body ? { body: t.body } : {}),
-      });
-
-      const text = await r.text();
-      let data;
-      try { data = JSON.parse(text); } catch { data = text; }
-
-      const qr = extrairQR(data);
-      if (qr) {
-        console.log('✅ QR encontrado em:', t.method, t.url);
-        return qr;
-      }
-
-      console.warn('⚠️ Sem QR em:', t.method, t.url, '→ status', r.status);
-    } catch (e) {
-      ultimoErro = e;
-      console.warn('❌ Erro em:', t.url, e.message);
-    }
-  }
-
-  throw ultimoErro || new Error('Nenhum endpoint retornou QR Code.');
-}
-
-// ─── Renderizar QR ────────────────────────────────────────────────────────────
-function renderizarQR(qr) {
-  const container = document.getElementById('qrcode');
-  container.innerHTML = '';
-
-  if (qr.tipo === 'img') {
-    const img = document.createElement('img');
-    img.src   = qr.val;
-    img.style.cssText = 'width:240px;height:240px;border-radius:6px;display:block;';
-    container.appendChild(img);
-  } else {
-    if (qrObj) { try { qrObj.clear(); } catch {} }
-    qrObj = new QRCode(container, {
-      text: qr.val, width: 240, height: 240,
-      colorDark: '#000000', colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.M,
-    });
-  }
-
-  // Timer regressivo
-  secsLeft = 60;
-  const badge     = document.getElementById('timerBadge');
-  const countdown = document.getElementById('countdown');
-  badge.classList.remove('hidden');
-  countdown.textContent = secsLeft;
+  // timer regressivo de 60s
+  secs = 60;
+  $('countdown').textContent = secs;
+  $('timerBadge').classList.remove('hidden');
   clearInterval(timerInt);
   timerInt = setInterval(() => {
-    secsLeft--;
-    countdown.textContent = secsLeft;
-    if (secsLeft <= 0) { clearInterval(timerInt); refreshQR(); }
+    secs--;
+    $('countdown').textContent = secs;
+    if (secs <= 0) { clearInterval(timerInt); refreshQR(); }
   }, 1000);
 }
 
 // ─── INICIAR ──────────────────────────────────────────────────────────────────
 async function iniciar() {
-  apiUrl   = document.getElementById('apiUrl').value.trim();
-  apiToken = document.getElementById('apiToken').value.trim();
+  apiUrl   = $('fUrl').value.trim();
+  apiToken = $('fToken').value.trim();
 
-  if (!apiUrl || !apiToken) { alert('Preencha a URL da API e o Token.'); return; }
+  if (!apiUrl)   { alert('Informe a URL da API.'); return; }
+  if (!apiToken) { alert('Informe o Token da instância.'); return; }
   if (!apiUrl.startsWith('http')) apiUrl = 'https://' + apiUrl;
 
-  try { localStorage.setItem('uaz_cfg', JSON.stringify({ url: apiUrl, token: apiToken })); } catch {}
+  try { localStorage.setItem('uaz3', JSON.stringify({ url: apiUrl, token: apiToken })); } catch {}
 
-  document.getElementById('corsHelp').classList.add('hidden');
-  document.getElementById('btnGo').disabled = true;
-  setStatus('loading', 'Conectando à API UAZAPI…');
+  $('btnGo').disabled = true;
+  setStatus('loading', 'Gerando QR Code…');
 
   try {
     const qr = await buscarQR();
-    document.getElementById('configCard').classList.add('hidden');
-    document.getElementById('qrCard').classList.remove('hidden');
-    setStatus('ok', 'QR Code gerado com sucesso! Escaneie agora.');
-    renderizarQR(qr);
+    $('cfgCard').classList.add('hidden');
+    $('qrCard').classList.remove('hidden');
+    setStatus('ok', 'QR Code pronto! Escaneie agora.');
+    renderQR(qr);
     iniciarPolling();
-  } catch (e) {
-    document.getElementById('btnGo').disabled = false;
+  } catch(e) {
+    $('btnGo').disabled = false;
+    console.error(e);
 
-    const ehCors = (e instanceof TypeError) && (
-      e.message === 'Failed to fetch' ||
-      e.message.toLowerCase().includes('network') ||
-      e.message.toLowerCase().includes('cors')
-    );
-
-    if (ehCors) {
-      setStatus('err', 'Bloqueado por CORS — veja instrução abaixo.');
-      document.getElementById('corsHelp').classList.remove('hidden');
+    const isCors = e instanceof TypeError && e.message === 'Failed to fetch';
+    if (isCors) {
+      setStatus('err', 'Erro de rede (CORS). A API bloqueou a requisição do navegador.');
     } else {
       setStatus('err', 'Não foi possível obter o QR. Verifique URL e Token.');
     }
   }
 }
 
-// ─── ATUALIZAR QR ─────────────────────────────────────────────────────────────
+// ─── REFRESH ──────────────────────────────────────────────────────────────────
 async function refreshQR() {
   clearInterval(timerInt);
   setStatus('loading', 'Atualizando QR Code…');
   try {
     const qr = await buscarQR();
-    setStatus('ok', 'QR Code atualizado! Escaneie agora.');
-    renderizarQR(qr);
+    setStatus('ok', 'QR atualizado! Escaneie agora.');
+    renderQR(qr);
   } catch {
-    setStatus('err', 'Falha ao atualizar. Tente novamente.');
+    setStatus('err', 'Falha ao atualizar. Tentando novamente em 5s…');
+    setTimeout(refreshQR, 5000);
   }
 }
 
-// ─── POLLING DE STATUS ────────────────────────────────────────────────────────
+// ─── POLLING de conexão ───────────────────────────────────────────────────────
+// Confirmado: GET /status retorna checked_instance.connection_status = "connected"
 function iniciarPolling() {
   clearInterval(pollInt);
-  const endpoints = [
-    `${base()}/instance/status`,
-    `${base()}/instance/connectionState`,
-    `${base()}/status`,
-  ];
-  let idx = 0;
+  const base = apiUrl.replace(/\/+$/, '');
+  const hdrs = { 'Content-Type': 'application/json', 'token': apiToken };
 
   pollInt = setInterval(async () => {
     try {
-      const url = endpoints[idx % endpoints.length]; idx++;
-      const r   = await apiFetch(url, { headers: hdrs() });
+      // Endpoint de status do servidor (confirmado: GET /status → 200)
+      const r = await apiFetch(`${base}/status`, { headers: hdrs });
       if (!r.ok) return;
-      const data = await r.json().catch(() => null);
-      if (!data) return;
+      const data = await r.json();
 
-      const st = (
-        data?.state || data?.status || data?.connectionState ||
-        data?.instance?.state || data?.instance?.status ||
-        data?.data?.state || data?.data?.status || ''
+      // Campo confirmado: checked_instance.connection_status = "connected"
+      const connStatus = (
+        data?.checked_instance?.connection_status ||
+        data?.instance?.status ||
+        data?.status || ''
       ).toString().toLowerCase();
 
-      if (['open', 'connected', 'online', 'authenticated'].some(s => st.includes(s))) {
-        clearInterval(pollInt); clearInterval(timerInt);
+      if (connStatus === 'connected' || connStatus === 'open' || connStatus === 'online') {
+        clearInterval(pollInt);
+        clearInterval(timerInt);
         setStatus('live', '✅ WhatsApp conectado com sucesso!');
-        document.getElementById('qrcode').innerHTML =
-          `<div class="check-wrap">
+        $('qrBox').innerHTML = `
+          <div class="check-wrap">
             <svg viewBox="0 0 52 52" fill="none">
               <circle cx="26" cy="26" r="25" fill="#dcfce7" stroke="#25d366" stroke-width="2"/>
               <path d="M15 26l8 8 14-16" stroke="#25d366" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>`;
-        document.getElementById('timerBadge').classList.add('hidden');
+        $('timerBadge').classList.add('hidden');
       }
-    } catch {}
+    } catch { /* ignora erros de rede no poll */ }
   }, 4000);
 }
 
-// ─── VOLTAR CONFIG ────────────────────────────────────────────────────────────
-function voltarConfig() {
+// ─── VOLTAR ───────────────────────────────────────────────────────────────────
+function voltarCfg() {
   clearInterval(pollInt); clearInterval(timerInt);
-  document.getElementById('configCard').classList.remove('hidden');
-  document.getElementById('qrCard').classList.add('hidden');
-  document.getElementById('corsHelp').classList.add('hidden');
-  document.getElementById('statusBar').classList.add('hidden');
-  document.getElementById('btnGo').disabled = false;
+  $('cfgCard').classList.remove('hidden');
+  $('qrCard').classList.add('hidden');
+  $('statusBar').classList.add('hidden');
+  $('btnGo').disabled = false;
 }
 </script>
 </body>
