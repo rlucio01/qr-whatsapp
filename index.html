@@ -32,132 +32,186 @@
       position: relative; overflow-x: hidden;
     }
     body::before {
-      content:''; position:fixed; inset:0; pointer-events:none;
+      content: ''; position: fixed; inset: 0; pointer-events: none;
       background:
         radial-gradient(ellipse 70% 50% at 50% -10%, rgba(13,74,34,.35) 0%, transparent 65%),
         radial-gradient(ellipse 40% 30% at 90% 90%,  rgba(13,58,26,.2)  0%, transparent 60%);
     }
     .grid-bg {
-      position:fixed; inset:0; pointer-events:none;
+      position: fixed; inset: 0; pointer-events: none;
       background-image:
         linear-gradient(rgba(37,211,102,.055) 1px, transparent 1px),
         linear-gradient(90deg, rgba(37,211,102,.055) 1px, transparent 1px);
       background-size: 52px 52px;
     }
 
-    .container { width:100%; max-width:440px; position:relative; z-index:1; }
+    .container { width: 100%; max-width: 440px; position: relative; z-index: 1; }
 
-    /* header */
-    .header { text-align:center; margin-bottom:1.75rem; animation: fadeDown .5s ease both; }
-    .brand  { display:inline-flex; align-items:center; gap:.65rem; margin-bottom:.9rem; }
+    /* ── header ── */
+    .header { text-align: center; margin-bottom: 1.75rem; animation: fadeDown .5s ease both; }
+    .brand  { display: inline-flex; align-items: center; gap: .65rem; margin-bottom: .9rem; }
     .brand-ico {
-      width:44px; height:44px;
-      background:var(--green-glow); border:1.5px solid var(--green);
-      border-radius:12px; display:flex; align-items:center; justify-content:center;
-      box-shadow:0 0 24px var(--green-glow);
+      width: 44px; height: 44px;
+      background: var(--green-glow); border: 1.5px solid var(--green);
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 24px var(--green-glow);
     }
-    .brand-ico svg { width:22px; height:22px; fill:var(--green); }
-    .brand-name { font-size:1.35rem; font-weight:800; letter-spacing:-.03em; }
-    .subtitle { font-size:.85rem; color:var(--muted); line-height:1.65; }
+    .brand-ico svg { width: 22px; height: 22px; fill: var(--green); }
+    .brand-name { font-size: 1.35rem; font-weight: 800; letter-spacing: -.03em; }
+    .subtitle { font-size: .85rem; color: var(--muted); line-height: 1.65; }
 
-    /* card */
+    /* ── card ── */
     .card {
-      background:var(--card); border:1px solid var(--border);
-      border-radius:18px; padding:1.6rem; margin-bottom:.9rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 18px; padding: 1.6rem; margin-bottom: .9rem;
     }
     .card-lbl {
-      font-size:.67rem; font-weight:700; letter-spacing:.12em;
-      text-transform:uppercase; color:var(--green); margin-bottom:1rem;
+      font-size: .67rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--green); margin-bottom: 1rem;
     }
 
-    /* form */
-    .field { margin-bottom:.85rem; }
-    .field label { display:block; font-size:.74rem; color:var(--muted); margin-bottom:.3rem; font-family:'DM Mono',monospace; }
+    /* ── form ── */
+    .field { margin-bottom: .85rem; }
+    .field label { display: block; font-size: .74rem; color: var(--muted); margin-bottom: .3rem; font-family: 'DM Mono', monospace; }
     .field input {
-      width:100%; background:var(--surface); border:1px solid var(--border);
-      border-radius:9px; padding:.7rem .9rem; color:var(--text);
-      font-family:'DM Mono',monospace; font-size:.82rem; outline:none;
+      width: 100%; background: var(--surface); border: 1px solid var(--border);
+      border-radius: 9px; padding: .7rem .9rem; color: var(--text);
+      font-family: 'DM Mono', monospace; font-size: .82rem; outline: none;
       transition: border-color .2s, box-shadow .2s;
     }
-    .field input:focus { border-color:var(--green); box-shadow:0 0 0 3px rgba(37,211,102,.15); }
-    .field input::placeholder { color:var(--muted); opacity:.4; }
+    .field input:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(37,211,102,.15); }
+    .field input::placeholder { color: var(--muted); opacity: .4; }
 
-    /* buttons */
+    /* ── buttons ── */
     .btn {
-      width:100%; padding:.82rem 1.3rem; border-radius:10px;
-      font-family:'Syne',sans-serif; font-weight:700; font-size:.88rem;
-      cursor:pointer; border:none; transition:all .18s;
-      display:flex; align-items:center; justify-content:center; gap:.5rem;
+      width: 100%; padding: .82rem 1.3rem; border-radius: 10px;
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: .88rem;
+      cursor: pointer; border: none; transition: all .18s;
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
     }
-    .btn-primary { background:var(--green); color:#04100a; box-shadow:0 4px 20px var(--green-glow); }
-    .btn-primary:hover:not(:disabled) { background:var(--green-dim); transform:translateY(-1px); }
-    .btn-primary:disabled { opacity:.4; cursor:not-allowed; }
+    .btn-primary { background: var(--green); color: #04100a; box-shadow: 0 4px 20px var(--green-glow); }
+    .btn-primary:hover:not(:disabled) { background: var(--green-dim); transform: translateY(-1px); }
+    .btn-primary:disabled { opacity: .4; cursor: not-allowed; }
     .btn-ghost {
-      background:transparent; color:var(--muted);
-      border:1px solid var(--border); margin-top:.55rem; font-size:.8rem;
+      background: transparent; color: var(--muted);
+      border: 1px solid var(--border); margin-top: .55rem; font-size: .8rem;
     }
-    .btn-ghost:hover { color:var(--text); border-color:var(--muted); }
+    .btn-ghost:hover { color: var(--text); border-color: var(--muted); }
 
-    /* status */
+    /* ── status ── */
     .status {
-      display:flex; align-items:center; gap:.55rem;
-      padding:.65rem 1rem; border-radius:9px; border:1px solid transparent;
-      font-family:'DM Mono',monospace; font-size:.76rem; margin-bottom:.9rem;
+      display: flex; align-items: center; gap: .55rem;
+      padding: .65rem 1rem; border-radius: 9px; border: 1px solid transparent;
+      font-family: 'DM Mono', monospace; font-size: .76rem; margin-bottom: .9rem;
     }
-    .dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
-    .status.loading { background:rgba(255,255,255,.04); border-color:var(--border); color:var(--muted); }
-    .status.loading .dot { background:var(--muted); animation:blink 1s infinite; }
-    .status.ok   { background:rgba(37,211,102,.08);  border-color:rgba(37,211,102,.3); color:var(--green); }
-    .status.ok   .dot { background:var(--green); }
-    .status.err  { background:rgba(240,87,87,.08);   border-color:rgba(240,87,87,.3);  color:var(--danger); }
-    .status.err  .dot { background:var(--danger); }
-    .status.live { background:rgba(245,200,66,.08);  border-color:rgba(245,200,66,.3); color:var(--warn); }
-    .status.live .dot { background:var(--warn); animation:blink 1.3s infinite; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .status.loading { background: rgba(255,255,255,.04); border-color: var(--border); color: var(--muted); }
+    .status.loading .dot { background: var(--muted); animation: blink 1s infinite; }
+    .status.ok   { background: rgba(37,211,102,.08); border-color: rgba(37,211,102,.3); color: var(--green); }
+    .status.ok   .dot { background: var(--green); }
+    .status.err  { background: rgba(240,87,87,.08);  border-color: rgba(240,87,87,.3);  color: var(--danger); }
+    .status.err  .dot { background: var(--danger); }
 
-    /* QR */
-    .qr-wrap { display:flex; flex-direction:column; align-items:center; gap:1.2rem; }
+    /* ── share link box ── */
+    .share-box {
+      background: rgba(77,200,245,.06); border: 1px solid rgba(77,200,245,.22);
+      border-radius: 10px; padding: .75rem .9rem; margin-top: .8rem;
+    }
+    .share-label {
+      font-size: .67rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: #4dc8f5; margin-bottom: .55rem;
+      display: flex; align-items: center; gap: .35rem;
+    }
+    .share-row { display: flex; align-items: center; gap: .45rem; }
+    .share-url {
+      flex: 1; background: rgba(255,255,255,.05); border: 1px solid rgba(77,200,245,.2);
+      border-radius: 7px; padding: .42rem .7rem;
+      font-family: 'DM Mono', monospace; font-size: .64rem; color: #7dd8f7;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      display: block; min-width: 0;
+    }
+    .btn-copy {
+      flex-shrink: 0;
+      background: rgba(37,211,102,.12); border: 1px solid rgba(37,211,102,.35);
+      border-radius: 7px; padding: .42rem .85rem; cursor: pointer;
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: .72rem;
+      color: var(--green); white-space: nowrap; transition: all .18s;
+      display: flex; align-items: center; gap: .35rem;
+    }
+    .btn-copy:hover { background: rgba(37,211,102,.22); }
+    .btn-copy.copied {
+      background: rgba(37,211,102,.3); color: #fff;
+      border-color: var(--green); transform: scale(.97);
+    }
+    .btn-copy svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+    /* ── QR ── */
+    .qr-wrap { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
     .qr-box  {
-      background:#fff; border-radius:14px; padding:1.05rem;
-      box-shadow:0 0 50px var(--green-glow);
+      background: #fff; border-radius: 14px; padding: 1.05rem;
+      box-shadow: 0 0 50px var(--green-glow); min-width: 258px; min-height: 258px;
+      display: flex; align-items: center; justify-content: center;
     }
-    .qr-box img { display:block; width:240px; height:240px; border-radius:6px; }
-    .qr-meta { text-align:center; }
-    .qr-meta p { font-size:.82rem; color:var(--muted); line-height:1.7; }
-    .qr-meta strong { color:var(--text); }
+    .qr-box img { display: block; width: 240px; height: 240px; border-radius: 6px; }
+    .qr-meta { text-align: center; }
+    .qr-meta p { font-size: .82rem; color: var(--muted); line-height: 1.7; }
+    .qr-meta strong { color: var(--text); }
     .timer {
-      display:inline-flex; align-items:center; gap:.35rem; margin-top:.45rem;
-      padding:.28rem .7rem; background:var(--surface); border:1px solid var(--border);
-      border-radius:99px; font-family:'DM Mono',monospace; font-size:.73rem; color:var(--warn);
+      display: inline-flex; align-items: center; gap: .35rem; margin-top: .45rem;
+      padding: .28rem .7rem; background: var(--surface); border: 1px solid var(--border);
+      border-radius: 99px; font-family: 'DM Mono', monospace; font-size: .73rem; color: var(--warn);
     }
 
-    /* info box */
-    .box-info {
-      background:rgba(77,200,245,.07); border:1px solid rgba(77,200,245,.25);
-      border-radius:9px; padding:.7rem .9rem;
-      font-family:'DM Mono',monospace; font-size:.72rem; color:#7dd8f7;
-      margin-top:.75rem; line-height:1.75;
+    /* ── SUCCESS SCREEN ── */
+    .success-screen {
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: 1.15rem; padding: .5rem 0 .75rem;
     }
-    .box-info b { color:#a0e4ff; }
-    .box-info code {
-      background:rgba(255,255,255,.08); padding:.1rem .3rem;
-      border-radius:4px; font-size:.68rem; word-break:break-all;
+    .success-aura {
+      width: 108px; height: 108px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(37,211,102,.22) 0%, transparent 70%);
+      display: flex; align-items: center; justify-content: center;
+      animation: popIn .6s cubic-bezier(.34,1.56,.64,1) both;
+      box-shadow: 0 0 40px rgba(37,211,102,.2);
+    }
+    .success-aura svg { width: 60px; height: 60px; }
+    .success-title {
+      font-size: 1.3rem; font-weight: 800; color: var(--green);
+      letter-spacing: -.02em; line-height: 1.25;
+      animation: fadeUp .45s ease .15s both;
+    }
+    .success-body {
+      font-size: .85rem; color: var(--muted); line-height: 1.75;
+      animation: fadeUp .45s ease .25s both;
+    }
+    .success-body strong { color: var(--text); }
+    .success-pill {
+      display: inline-flex; align-items: center; gap: .55rem;
+      background: rgba(37,211,102,.1); border: 1px solid rgba(37,211,102,.35);
+      border-radius: 99px; padding: .45rem 1.2rem;
+      font-family: 'DM Mono', monospace; font-size: .76rem; color: var(--green);
+      animation: fadeUp .45s ease .35s both;
+    }
+    .live-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--green);
+      animation: blink 1.4s infinite;
+    }
+    .success-divider {
+      width: 40px; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--green), transparent);
+      border-radius: 99px;
+      animation: fadeUp .45s ease .2s both;
     }
 
-    /* success */
-    .check-wrap {
-      width:240px; height:240px;
-      display:flex; align-items:center; justify-content:center;
-      background:#f0fdf4; border-radius:8px;
-    }
-    .check-wrap svg { width:88px; height:88px; }
+    .footer { margin-top: 1.25rem; text-align: center; font-size: .7rem; color: var(--muted); opacity: .4; }
 
-    .footer { margin-top:1.25rem; text-align:center; font-size:.7rem; color:var(--muted); opacity:.4; }
-
-    .hidden { display:none !important; }
+    .hidden { display: none !important; }
 
     @keyframes fadeDown { from{opacity:0;transform:translateY(-12px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeUp   { from{opacity:0;transform:translateY(10px)}  to{opacity:1;transform:translateY(0)} }
     @keyframes blink    { 0%,100%{opacity:1} 50%{opacity:.2} }
     @keyframes spin     { to{transform:rotate(360deg)} }
+    @keyframes popIn    { from{opacity:0;transform:scale(.35)} to{opacity:1;transform:scale(1)} }
   </style>
 </head>
 <body>
@@ -181,7 +235,7 @@
     <span id="statusTxt"></span>
   </div>
 
-  <!-- CONFIG CARD -->
+  <!-- ══ CONFIG CARD ══ -->
   <div class="card" id="cfgCard">
     <div class="card-lbl">⚙ Configuração da instância</div>
     <div class="field">
@@ -196,18 +250,31 @@
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
       Gerar QR Code
     </button>
-    <div class="box-info">
-      💡 <b>Compartilhe o link já configurado:</b><br>
-      <code id="linkShare"></code>
+
+    <!-- Share link -->
+    <div class="share-box">
+      <div class="share-label">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        Link para compartilhar com o cliente
+      </div>
+      <div class="share-row">
+        <span class="share-url" id="linkShare">—</span>
+        <button class="btn-copy" id="btnCopy" onclick="copiarLink()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+          </svg>
+          Copiar
+        </button>
+      </div>
     </div>
   </div>
 
-  <!-- QR CARD -->
+  <!-- ══ QR CARD ══ -->
   <div class="card hidden" id="qrCard">
     <div class="card-lbl">📱 Escaneie com o WhatsApp</div>
     <div class="qr-wrap">
       <div class="qr-box" id="qrBox">
-        <!-- imagem QR inserida aqui -->
+        <!-- QR inserido aqui -->
       </div>
       <div class="qr-meta">
         <p>Abra o WhatsApp → <strong>Configurações</strong><br>
@@ -219,6 +286,34 @@
     </div>
     <button class="btn btn-ghost" onclick="refreshQR()">↻ Atualizar QR Code</button>
     <button class="btn btn-ghost" onclick="voltarCfg()">← Alterar configurações</button>
+  </div>
+
+  <!-- ══ SUCCESS CARD ══ -->
+  <div class="card hidden" id="successCard">
+    <div class="success-screen">
+
+      <div class="success-aura">
+        <svg viewBox="0 0 64 64" fill="none">
+          <circle cx="32" cy="32" r="31" fill="#dcfce7" stroke="#25d366" stroke-width="2"/>
+          <path d="M18 32l10 10 18-20" stroke="#25d366" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="success-title">WhatsApp conectado!</div>
+
+      <div class="success-divider"></div>
+
+      <div class="success-body">
+        Seu dispositivo foi vinculado com sucesso.<br>
+        <strong>Você já pode fechar esta página.</strong>
+      </div>
+
+      <div class="success-pill">
+        <span class="live-dot"></span>
+        Instância online e pronta para uso
+      </div>
+
+    </div>
   </div>
 
   <div class="footer">Powered by UAZAPI · GitHub Pages</div>
@@ -242,17 +337,54 @@ window.addEventListener('DOMContentLoaded', () => {
   $('fUrl').addEventListener('input',   atualizarLink);
   $('fToken').addEventListener('input', atualizarLink);
 
-  // auto-start se vier pelos parâmetros de URL
   if (p.get('url') && p.get('token')) setTimeout(iniciar, 400);
 });
 
 function $(id) { return document.getElementById(id); }
 
+// ─── gerar link compartilhável ────────────────────────────────────────────────
 function atualizarLink() {
   const base  = location.href.split('?')[0];
   const url   = $('fUrl').value.trim()   || 'https://free.uazapi.com';
   const token = $('fToken').value.trim() || 'SEU_TOKEN';
-  $('linkShare').textContent = `${base}?url=${encodeURIComponent(url)}&token=${encodeURIComponent(token)}`;
+  const link  = `${base}?url=${encodeURIComponent(url)}&token=${encodeURIComponent(token)}`;
+  $('linkShare').textContent = link;
+  $('linkShare').dataset.link = link;
+}
+
+// ─── copiar link ──────────────────────────────────────────────────────────────
+function copiarLink() {
+  const link = $('linkShare').dataset.link || $('linkShare').textContent;
+  navigator.clipboard.writeText(link).then(() => {
+    const btn = $('btnCopy');
+    btn.classList.add('copied');
+    btn.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+      Copiado!`;
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px">
+          <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+        </svg>
+        Copiar`;
+    }, 2200);
+  }).catch(() => {
+    // fallback para browsers sem clipboard API
+    const el = document.createElement('textarea');
+    el.value = link;
+    el.style.cssText = 'position:fixed;opacity:0';
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    const btn = $('btnCopy');
+    btn.classList.add('copied');
+    btn.textContent = '✓ Copiado!';
+    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = 'Copiar'; }, 2200);
+  });
 }
 
 // ─── status UI ────────────────────────────────────────────────────────────────
@@ -269,68 +401,47 @@ async function apiFetch(url, opts = {}) {
   const tid  = setTimeout(() => ctrl.abort(), 15000);
   try {
     const r = await fetch(url, { ...opts, signal: ctrl.signal });
-    clearTimeout(tid);
-    return r;
+    clearTimeout(tid); return r;
   } catch(e) { clearTimeout(tid); throw e; }
 }
 
-// ─── buscar QR — endpoints confirmados pelo debug ─────────────────────────────
-// Confirmado: POST /instance/connect e GET /instance/status retornam
-//   { instance: { qrcode: "data:image/png;base64,..." } }
+// ─── buscar QR — endpoints confirmados ───────────────────────────────────────
 async function buscarQR() {
   const base = apiUrl.replace(/\/+$/, '');
   const hdrs = { 'Content-Type': 'application/json', 'token': apiToken };
 
-  // 1º: POST /instance/connect (mais rápido, sempre retorna QR fresco)
+  // 1º: POST /instance/connect (retorna QR fresco)
   try {
-    const r = await apiFetch(`${base}/instance/connect`, {
-      method: 'POST',
-      headers: hdrs,
-      body: '{}',
-    });
+    const r    = await apiFetch(`${base}/instance/connect`, { method: 'POST', headers: hdrs, body: '{}' });
     const data = await r.json();
-    const qr = extrairQR(data);
+    const qr   = extrairQR(data);
     if (qr) return qr;
-  } catch(e) { console.warn('POST /instance/connect falhou:', e.message); }
+  } catch(e) { console.warn('POST /instance/connect:', e.message); }
 
-  // 2º: GET /instance/status (fallback — também traz qrcode enquanto desconectado)
+  // 2º: GET /instance/status (fallback)
   try {
-    const r = await apiFetch(`${base}/instance/status`, {
-      method: 'GET',
-      headers: hdrs,
-    });
+    const r    = await apiFetch(`${base}/instance/status`, { method: 'GET', headers: hdrs });
     const data = await r.json();
-    const qr = extrairQR(data);
+    const qr   = extrairQR(data);
     if (qr) return qr;
-  } catch(e) { console.warn('GET /instance/status falhou:', e.message); }
+  } catch(e) { console.warn('GET /instance/status:', e.message); }
 
   throw new Error('Nenhum endpoint retornou QR Code.');
 }
 
-// ─── extrair QR do JSON retornado ─────────────────────────────────────────────
-// Estrutura confirmada: data.instance.qrcode = "data:image/png;base64,..."
+// ─── extrair campo qrcode da resposta ─────────────────────────────────────────
+// Confirmado: { instance: { qrcode: "data:image/png;base64,..." } }
 function extrairQR(data) {
-  // Caminho principal confirmado
   if (data?.instance?.qrcode) return data.instance.qrcode;
-
-  // Caminhos alternativos por segurança
-  const candidates = [
-    data?.qrcode, data?.qr, data?.qrCode,
-    data?.data?.qrcode, data?.data?.qr, data?.data?.qrCode,
-    data?.result?.qrcode, data?.result?.qr,
-  ];
-  for (const c of candidates) {
-    if (c && typeof c === 'string' && c.length > 20) return c;
-  }
+  const c = [data?.qrcode, data?.qr, data?.qrCode,
+    data?.data?.qrcode, data?.data?.qr, data?.result?.qr];
+  for (const v of c) if (v && typeof v === 'string' && v.length > 20) return v;
   return null;
 }
 
-// ─── renderizar QR Code (base64 PNG) ─────────────────────────────────────────
+// ─── renderizar QR ────────────────────────────────────────────────────────────
 function renderQR(base64png) {
-  const box = $('qrBox');
-  box.innerHTML = `<img src="${base64png}" alt="QR Code WhatsApp" />`;
-
-  // timer regressivo de 60s
+  $('qrBox').innerHTML = `<img src="${base64png}" alt="QR Code WhatsApp" />`;
   secs = 60;
   $('countdown').textContent = secs;
   $('timerBadge').classList.remove('hidden');
@@ -347,8 +458,8 @@ async function iniciar() {
   apiUrl   = $('fUrl').value.trim();
   apiToken = $('fToken').value.trim();
 
-  if (!apiUrl)   { alert('Informe a URL da API.'); return; }
-  if (!apiToken) { alert('Informe o Token da instância.'); return; }
+  if (!apiUrl)   { alert('Informe a URL da API.');          return; }
+  if (!apiToken) { alert('Informe o Token da instância.');  return; }
   if (!apiUrl.startsWith('http')) apiUrl = 'https://' + apiUrl;
 
   try { localStorage.setItem('uaz3', JSON.stringify({ url: apiUrl, token: apiToken })); } catch {}
@@ -366,13 +477,10 @@ async function iniciar() {
   } catch(e) {
     $('btnGo').disabled = false;
     console.error(e);
-
     const isCors = e instanceof TypeError && e.message === 'Failed to fetch';
-    if (isCors) {
-      setStatus('err', 'Erro de rede (CORS). A API bloqueou a requisição do navegador.');
-    } else {
-      setStatus('err', 'Não foi possível obter o QR. Verifique URL e Token.');
-    }
+    setStatus('err', isCors
+      ? 'Erro de rede (CORS). A API bloqueou a requisição do navegador.'
+      : 'Não foi possível obter o QR. Verifique URL e Token.');
   }
 }
 
@@ -385,13 +493,13 @@ async function refreshQR() {
     setStatus('ok', 'QR atualizado! Escaneie agora.');
     renderQR(qr);
   } catch {
-    setStatus('err', 'Falha ao atualizar. Tentando novamente em 5s…');
+    setStatus('err', 'Falha ao atualizar. Tentando em 5s…');
     setTimeout(refreshQR, 5000);
   }
 }
 
 // ─── POLLING de conexão ───────────────────────────────────────────────────────
-// Confirmado: GET /status retorna checked_instance.connection_status = "connected"
+// GET /status → checked_instance.connection_status === "connected"
 function iniciarPolling() {
   clearInterval(pollInt);
   const base = apiUrl.replace(/\/+$/, '');
@@ -399,40 +507,43 @@ function iniciarPolling() {
 
   pollInt = setInterval(async () => {
     try {
-      // Endpoint de status do servidor (confirmado: GET /status → 200)
       const r = await apiFetch(`${base}/status`, { headers: hdrs });
       if (!r.ok) return;
       const data = await r.json();
 
-      // Campo confirmado: checked_instance.connection_status = "connected"
       const connStatus = (
         data?.checked_instance?.connection_status ||
         data?.instance?.status ||
         data?.status || ''
       ).toString().toLowerCase();
 
-      if (connStatus === 'connected' || connStatus === 'open' || connStatus === 'online') {
-        clearInterval(pollInt);
-        clearInterval(timerInt);
-        setStatus('live', '✅ WhatsApp conectado com sucesso!');
-        $('qrBox').innerHTML = `
-          <div class="check-wrap">
-            <svg viewBox="0 0 52 52" fill="none">
-              <circle cx="26" cy="26" r="25" fill="#dcfce7" stroke="#25d366" stroke-width="2"/>
-              <path d="M15 26l8 8 14-16" stroke="#25d366" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>`;
-        $('timerBadge').classList.add('hidden');
+      if (['connected', 'open', 'online'].includes(connStatus)) {
+        mostrarSucesso();
       }
-    } catch { /* ignora erros de rede no poll */ }
+    } catch { /* ignora erros de rede */ }
   }, 4000);
 }
 
-// ─── VOLTAR ───────────────────────────────────────────────────────────────────
+// ─── TELA DE SUCESSO ──────────────────────────────────────────────────────────
+function mostrarSucesso() {
+  clearInterval(pollInt);
+  clearInterval(timerInt);
+
+  // Esconde QR e status, mostra card de sucesso
+  $('qrCard').classList.add('hidden');
+  $('statusBar').classList.add('hidden');
+  $('successCard').classList.remove('hidden');
+
+  // Scroll suave para o topo
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── VOLTAR CONFIG ────────────────────────────────────────────────────────────
 function voltarCfg() {
   clearInterval(pollInt); clearInterval(timerInt);
   $('cfgCard').classList.remove('hidden');
   $('qrCard').classList.add('hidden');
+  $('successCard').classList.add('hidden');
   $('statusBar').classList.add('hidden');
   $('btnGo').disabled = false;
 }
